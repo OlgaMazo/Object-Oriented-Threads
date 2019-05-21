@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.management.ManagementFactory;
 import java.util.Random;
 
 public class Ex3B {
@@ -82,7 +81,7 @@ public class Ex3B {
 				lc.join();
 			} catch (InterruptedException e) {}
 			
-			totalRows = totalRows + lc.rows;
+			totalRows += lc.rows;
 
 			System.out.println("Thread running time: " + (endTime-startTime));
 			}
