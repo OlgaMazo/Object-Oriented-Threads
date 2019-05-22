@@ -4,23 +4,19 @@ import java.io.InputStream;
 import java.util.concurrent.Callable;
 
 /**
- *LineCounter2
- *This class implements the interface Callable.
- *When the thread start and the function call is on - it calculate and returns how many rows there are in a file
- * @author Olga and Daniel
+ * This class represents the thread (callable) that calculates the line number of the file.
+ * @author Daniel and Olga
  */
-public class LineCounter2 implements Callable <Integer>{
+public class LineCounter2 implements Callable<Integer>{
 	
-	private String file_name;
-	
+	private String fileName;
+
 	/**
-	 * LineCounter2
-	 * constructor that receive file's name
-	 * @param file_name - file's name 
+	 * LineCounter2 constractor
+	 * @param fileName - the file name
 	 */
-	public LineCounter2(String file_name) {
-		
-		this.file_name = file_name;
+	public LineCounter2(String fileName) {
+		this.fileName = fileName;
 	}
 
 	/**
@@ -32,33 +28,36 @@ public class LineCounter2 implements Callable <Integer>{
 	 */
 	public Integer call() throws Exception {
 		
-		//create an object that represent a stream in order to read the data from the file
-	    InputStream is = new BufferedInputStream(new FileInputStream(file_name));
+		//create input stream for the file in order to read the data from it
+	    InputStream is = new BufferedInputStream(new FileInputStream(fileName));
 	    try {
-	    	//byte array in order to read the chars from lines
-	        byte[] c = new byte[1024];
+	        byte[] c = new byte[1024]; //byte array in order to read the chars in the lines
 	        int count = 0;
 	        int readChars = 0;
-	        //flag for the first line
-	        boolean empty = true;
+	        boolean empty = true; //if the file is empty
 	        
-	        //while the file has more lines
+	      //while the file has more lines
 	        while ((readChars = is.read(c)) != -1) {
 	            empty = false;
-	            //go over all the line
+	            
+				//read this line until we reach a line drop
 	            for (int i = 0; i < readChars; ++i) {
-	            	//if we got the end of the line
 	                if (c[i] == '\n') {
 	                    ++count;
 	                }
 	            }
-	        }     
-	        return (count == 0 && !empty) ? 1 : count;
+	        }
 	        
-	    } finally {
-	    	//close the file
-	        is.close();
-	    }
+			//if there is one line in the file
+			if (count == 0 && !empty) {
+				return 1;
+			} else {
+				return count;
+			}
+
+			//close the input stream
+		} finally {
+			is.close();
+		}
 	}
-	
 }
