@@ -60,7 +60,9 @@ public class Ex3B {
 		final String dir = System.getProperty("user.dir");
 		
 		for(int i=0; i<fileNames.length; i++) {
-			File file = new File(dir + "\\" + fileNames[i]);		}
+			File file = new File(dir + "\\" + fileNames[i]);
+			file.delete();
+		}
 	}
 	
 	public static void countLinesThreads(int numFiles) {
