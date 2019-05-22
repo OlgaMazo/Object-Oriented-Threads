@@ -16,6 +16,15 @@ import java.util.concurrent.Future;
  * @author Olga and Daniel
  */
 public class Ex3B {
+	
+	public static void main(String[] args) {
+
+		countLinesThreads(6);
+		countLinesThreadPool(6);
+		countLinesOneProcess(6);
+
+	}
+	
 	/**
 	 *createFiles
 	 *This function creates files. The number of files will be according to the number it received.
@@ -120,7 +129,7 @@ public class Ex3B {
 			totalRows += lc.getRows();
 			}
 		
-		System.out.println("Total run time of the Threads in seconds: " + totalTime/1000);
+		System.out.println("Total running time (countLinesThreads): " + totalTime + " nano seconds");
 		System.out.println("Total rows in all the files: " + totalRows);
 		
 		//delete all the files
@@ -163,8 +172,9 @@ public class Ex3B {
 			} 
 		}
 		
-		System.out.println("Total run time of the Threads in seconds: " + totalTime/1000);
+		System.out.println("Total running time (countLinesThreadPool): " + totalTime + " nano seconds");
 		System.out.println("Total rows in all the files: " + totalRows);
+
 		
 		//delete all files
 		deleteFiles(filesNames);
@@ -204,7 +214,7 @@ public class Ex3B {
 			totalRows += rows;	
 		}
 		
-		System.out.println("Total run time of the Threads in seconds: " + totalTime/1000);
+		System.out.println("Total running time of the threads (countLinesOneProcess): " + totalTime + " nano seconds");
 		System.out.println("Total rows in all the files: " + totalRows);
 		
 		//delete all files
