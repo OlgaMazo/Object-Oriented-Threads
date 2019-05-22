@@ -76,8 +76,9 @@ public class LineCounter extends Thread {
 	        	rows = 1;
 	        else
 	        	rows = count;
-	    //close the file    
+	      
 	    } finally {
+	    	//close the file  
 	        is.close();
 	    }
 	}
